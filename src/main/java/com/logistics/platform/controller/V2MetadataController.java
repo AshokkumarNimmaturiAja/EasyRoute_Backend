@@ -34,7 +34,7 @@ public class V2MetadataController {
     public ResponseEntity<String> getUiConfig(@PathVariable String category) {
         return uiMetadataRepository.findByCategory(category)
                 .map(metadata -> ResponseEntity.ok(metadata.getValue()))
-                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.ok("[]")); // Return empty JSON array if not found to prevent UI crash
     }
 
     @PutMapping("/ui-config/{category}")

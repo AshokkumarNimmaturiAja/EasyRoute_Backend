@@ -33,10 +33,11 @@ public class AiService {
                 User user = userOpt.get();
                 List<ShipmentResponse> shipments = shipmentService.getMyShipments(email, null);
 
-                long pending = shipments.stream().filter(s -> s.getStatus().name().equals("PENDING")).count();
-                long completed = shipments.stream().filter(s -> s.getStatus().name().equals("DELIVERED")).count();
+                long pending = shipments.stream().filter(s -> s.getStatus() != null && s.getStatus().name().equals("PENDING")).count();
+                long completed = shipments.stream().filter(s -> s.getStatus() != null && s.getStatus().name().equals("DELIVERED")).count();
 
                 String recentShipments = shipments.stream()
+                        .filter(s -> s.getCreatedAt() != null)
                         .sorted((s1, s2) -> s2.getCreatedAt().compareTo(s1.getCreatedAt()))
                         .limit(10)
                         .map(s -> String.format("- Tracking #%s: %s (From: %s To: %s)", s.getTrackingNumber(), s.getStatus(), s.getPickupCity(), s.getDropCity()))
