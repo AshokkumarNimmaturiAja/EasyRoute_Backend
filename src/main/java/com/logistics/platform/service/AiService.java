@@ -52,10 +52,15 @@ public class AiService {
             }
         }
 
-        return chatClient.prompt()
-                .system(systemPrompt.toString())
-                .user(message)
-                .call()
-                .content();
+        try {
+            return chatClient.prompt()
+                    .system(systemPrompt.toString())
+                    .user(message)
+                    .call()
+                    .content();
+        } catch (Exception e) {
+            System.err.println("AI Service Error: " + e.getMessage());
+            return "I am your Logistics Assistant, but my AI connection is currently offline (API Key may be missing or invalid). Please configure the OPENAI_API_KEY environment variable to chat with me!";
+        }
     }
 }

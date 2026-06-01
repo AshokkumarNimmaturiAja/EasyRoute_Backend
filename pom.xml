@@ -41,6 +41,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Spring Boot DevTools for auto-restart -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Spring Boot Starter Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -136,6 +144,13 @@
             <groupId>me.paulschwarz</groupId>
             <artifactId>spring-dotenv</artifactId>
             <version>4.0.0</version>
+        </dependency>
+
+        <!-- Razorpay Java SDK -->
+        <dependency>
+            <groupId>com.razorpay</groupId>
+            <artifactId>razorpay-java</artifactId>
+            <version>1.4.6</version>
         </dependency>
     </dependencies>
 

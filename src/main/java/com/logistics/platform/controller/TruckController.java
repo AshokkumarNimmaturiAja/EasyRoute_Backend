@@ -49,7 +49,7 @@ public class TruckController {
     }
 
     @PutMapping("/{id}/availability")
-    @PreAuthorize("hasRole('DRIVER')")
+    @PreAuthorize("hasAnyRole('DRIVER', 'PICKUP')")
     public ResponseEntity<ApiResponse<TruckResponse>> toggleAvailability(
             @PathVariable("id") UUID id,
             @AuthenticationPrincipal UserDetails userDetails) {

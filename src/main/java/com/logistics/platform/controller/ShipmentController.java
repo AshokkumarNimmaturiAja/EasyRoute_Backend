@@ -93,4 +93,23 @@ public class ShipmentController {
         ShipmentResponse response = shipmentService.assignPickupPartner(shipmentId, partnerId);
         return ResponseEntity.ok(ApiResponse.success("Pickup partner assigned successfully", response));
     }
+
+    @PostMapping("/{id}/verify-payment")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<ApiResponse<String>> verifyPayment(
+            @PathVariable("id") UUID shipmentId,
+            @RequestBody com.logistics.platform.dto.request.PaymentVerifyRequest request) {
+        
+        shipmentService.verifyPayment(shipmentId, request);
+        return ResponseEntity.ok(ApiResponse.success("Payment verified successfully", "OK"));
+    }
+
+    @PostMapping("/estimate")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<ApiResponse<com.logistics.platform.dto.response.EstimateResponse>> getEstimate(
+            @RequestBody com.logistics.platform.dto.request.EstimateRequest request) {
+        
+        com.logistics.platform.dto.response.EstimateResponse response = shipmentService.calculateEstimate(request);
+        return ResponseEntity.ok(ApiResponse.success("Estimate calculated successfully", response));
+    }
 }
