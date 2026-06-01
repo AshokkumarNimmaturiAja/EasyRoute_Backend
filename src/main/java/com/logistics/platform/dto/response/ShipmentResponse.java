@@ -2,6 +2,7 @@ package com.logistics.platform.dto.response;
 
 import com.logistics.platform.dto.ShipmentItemDTO;
 import com.logistics.platform.entity.ShipmentStatus;
+import com.logistics.platform.entity.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,10 +39,14 @@ public class ShipmentResponse {
     private BigDecimal pickupLng;
     private BigDecimal dropLat;
     private BigDecimal dropLng;
+    private BigDecimal distanceKm;
     
     private BigDecimal totalWeightKg;
     private BigDecimal estimatedCost;
     private ShipmentStatus status;
+    private PaymentStatus paymentStatus;
+    private String razorpayOrderId;
+    private String razorpayKey;
     
     private LocalDateTime scheduledPickupTime;
     private LocalDateTime actualPickupTime;

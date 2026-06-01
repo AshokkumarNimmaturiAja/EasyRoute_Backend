@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/config")
+@RequestMapping("/api/v1/config")
 public class ConfigController {
 
     @Value("${google.maps.api-key:}")
@@ -18,6 +18,7 @@ public class ConfigController {
 
     @GetMapping("/maps-key")
     public ResponseEntity<ApiResponse<Map<String, String>>> getMapsKey() {
-        return ResponseEntity.ok(ApiResponse.success("Maps API Key retrieved successfully", Map.of("apiKey", googleMapsApiKey)));
+        String key = googleMapsApiKey != null ? googleMapsApiKey : "";
+        return ResponseEntity.ok(ApiResponse.success("Maps API Key retrieved successfully", Map.of("apiKey", key)));
     }
 }

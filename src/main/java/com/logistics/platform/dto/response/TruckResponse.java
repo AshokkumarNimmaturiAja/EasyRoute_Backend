@@ -27,6 +27,7 @@ public class TruckResponse {
     private boolean isVerified;
     private boolean isRejected;
     private boolean rateCardAccepted;
+    @com.fasterxml.jackson.annotation.JsonProperty("isAvailable")
     private boolean isAvailable;
     private String currentRouteArea;
     private LocalDateTime createdAt;

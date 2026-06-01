@@ -34,9 +34,13 @@ public class ShipmentCreateRequest {
     private BigDecimal dropLat;
     private BigDecimal dropLng;
 
+    private BigDecimal distanceKm;
+
     private LocalDateTime scheduledPickupTime;
 
     @NotEmpty(message = "Shipment must contain at least one item")
     @Valid
     private List<ShipmentItemDTO> items;
+
+    private String paymentMode; // ONLINE or COD
 }

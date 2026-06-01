@@ -63,7 +63,8 @@ public class FileUploadController {
         Path filePath = uploadPath.resolve(filename);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        String fileUrl = "http://localhost:8080/api/v1/upload/files/" + filename;
+        String baseUrl = System.getenv("BACKEND_URL") != null ? System.getenv("BACKEND_URL") : "http://localhost:8080";
+        String fileUrl = baseUrl + "/api/v1/upload/files/" + filename;
 
         return ResponseEntity.ok(ApiResponse.success("Document uploaded successfully",
                 Map.of("url", fileUrl, "filename", filename)));
@@ -109,7 +110,8 @@ public class FileUploadController {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // Build the URL that the frontend will use to access this image
-        String fileUrl = "http://localhost:8080/api/v1/upload/files/" + filename;
+        String baseUrl = System.getenv("BACKEND_URL") != null ? System.getenv("BACKEND_URL") : "http://localhost:8080";
+        String fileUrl = baseUrl + "/api/v1/upload/files/" + filename;
 
         // Update user's profile photo URL
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

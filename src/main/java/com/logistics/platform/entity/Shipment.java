@@ -71,6 +71,9 @@ public class Shipment extends BaseEntity {
     @Column(name = "drop_lng", precision = 10, scale = 7)
     private BigDecimal dropLng;
 
+    @Column(name = "distance_km", precision = 10, scale = 2)
+    private BigDecimal distanceKm;
+
     @Column(name = "pickup_pincode", length = 10)
     private String pickupPincode;
 
@@ -117,6 +120,19 @@ public class Shipment extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ShipmentStatus status;
+
+    @Column(name = "razorpay_order_id")
+    private String razorpayOrderId;
+
+    @Column(name = "payment_id")
+    private String paymentId;
+
+    @Column(name = "payment_signature")
+    private String paymentSignature;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status")
+    private PaymentStatus paymentStatus;
 
     @Column(name = "scheduled_pickup_time")
     private LocalDateTime scheduledPickupTime;

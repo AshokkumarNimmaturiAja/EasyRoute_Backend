@@ -54,7 +54,8 @@ public class SecurityConfig {
                         "/api/v1/auth/verify-email",
                         "/api/v1/auth/forgot-password",
                         "/api/v1/auth/reset-password",
-                        "/api/v1/upload/files/**"
+                        "/api/v1/upload/files/**",
+                        "/api/v2/metadata/**"
                 ).permitAll()
                 // Role restrictions
                 .requestMatchers("/api/v1/shipments/admin/**").hasRole("ADMIN")
@@ -73,10 +74,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*")); // Change to specific UI domain for production
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowedOriginPatterns(List.of("*")); // Allows all origins properly in Spring 6
+        configuration.setAllowedMethods(List.of("*")); // Allow all methods
+        configuration.setAllowedHeaders(List.of("*")); // Allow all headers
         configuration.setExposedHeaders(List.of("Authorization"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
